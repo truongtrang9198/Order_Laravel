@@ -1,0 +1,112 @@
+.body{
+    margin-top: 0%;
+    margin-bottom: 0%;
+    margin-left: 0%;
+    margin-right: 0%;
+    background-color: 	#E8E8E8;
+}
+#h1a{
+    color:aliceblue;
+}
+.header{
+    background-color: #ee7600;
+}
+#ul-navbar{
+    padding-left: 15px;
+}
+.nav-link{
+    color: gainsboro;
+    font-size: 20px;
+}
+#btn-add-form{
+    width: 60px !important;
+    height: 35px !important;
+    background-color: #ee7600;
+    color: aliceblue;
+}
+#add-menu{
+    width: 100px;
+    height: 38px;
+    background-color: #ee7600;
+    color: aliceblue;
+}
+#btn-add-menu   {
+    width: 60px !important;
+    height: 35px !important;
+    background-color: #ee7600;
+    color: aliceblue;
+}
+#btn-add-table{
+    width: 60px !important;
+    height: 35px !important;
+    background-color: #ee7600;
+    color: aliceblue;
+}
+#add-container{
+    background-color: white;
+}
+#add-staff{
+    width: 100px;
+    height: 38px;
+    background-color: #ee7600;
+    color: aliceblue;
+}
+.btn-add{
+    width: 100px;
+    height: 38px;
+    background-color: #ee7600;
+    color: aliceblue;
+}
+#table-staff{
+    background-color: white;
+}
+#img_login{
+    position: absolute;
+    width: 515px;
+    /* height: 370px; */
+    left: 690px;
+    top: 65px;
+
+}
+#login-frame{
+    width: 100%;
+    height: 100%;
+    background-color: #ee7600;
+}
+#form-login-admin{
+    width: 450px;
+    position: absolute;
+    left: 625px;
+    top: 235px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    background-color:#EE7621;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.input-admin{
+    height: 50px!important;
+}
+.btn-admin-login{
+    background-color: white;
+    margin-left: 140px;
+    width: 150px;
+}
+/* .toast{
+    background-color: white;
+    overflow: hidden;
+    position: fixed;
+    z-index: 999999;
+    top: -150px;
+    left: 0;
+
+} */
+.col-custom{
+    padding-left: 70px !important;
+}
+.col-custom1{
+    padding-right: 70px !important;
+}
+.col-custom2{
+    padding-right: 40px !important;
+}
