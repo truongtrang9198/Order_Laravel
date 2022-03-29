@@ -1,6 +1,6 @@
 
 <nav class="navbar navbar-expand-sm">
-    <a class="nav-brand" href=""><img height="150px" src="{{asset('\storage\app\img\order.png')}}" alt="Hình ảnh logo"> </a>
+    <a class="nav-brand" href=""><img height="150px" src="{{asset('http://localhost/Order_Laravel/storage/app/img/order.png')}}" alt="Hình ảnh logo"> </a>
 
 </nav>
 
