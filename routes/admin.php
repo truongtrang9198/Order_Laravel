@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 
 
 Route::get('/', [LoginController::class,'login'])->name('login');
-Route::get('getlogin', [LoginController1::class,'getLogin'])->name('getlogin');
+Route::get('getlogin/', [LoginController::class,'getLogin'])->name('getlogin');
    // quản lý nhân viên
 
 Route::get('home/', [ManageStaff::class,'list'])->name('show');
@@ -17,9 +17,9 @@ Route::prefix('ManageStaff')->group(function () {
     Route::get('home/',[ManageStaff::class,'list'])->name("ManageStaff");
     Route::get('add/',[ManageStaff::class,'add'])->name('add_staff');
     Route::get('index/',[ManageStaff::class,'index'])->name('index'); // kiem tra ket noi database
-    Route::get('/', function () {
-        return view("amin.Home.Login");
-    });
+    // Route::get('/', function () {
+    //     return view("amin.Home.Login");
+    // });
     Route::post('get_district/',[ManageStaff::class,'get_district'])->name("get_district");
     Route::post('check_info/',[ManageStaff::class,'check_info'])->name("check_info");
     Route::post('submit_staff/',[ManageStaff::class,'submit_staff'])->name("submit_staff");
