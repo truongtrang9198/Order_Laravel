@@ -29,6 +29,14 @@ class MenuModel extends Model
           //  $result = collect($result1)->all();
             //print_r($result);
         }
+
+        if($option['task']=="menu_with_id"){
+            $id = $params;
+            $result = DB::select('call menu_with_id('.$id.')');
+          // $result = StaffModel::where('ID_STAFF',$params)->get();
+          //  $result = collect($result1)->all();
+            //print_r($result);
+        }
         return $result;
     }
 
