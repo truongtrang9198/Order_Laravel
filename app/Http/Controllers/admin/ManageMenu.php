@@ -57,4 +57,20 @@ class ManageMenu extends Controller
         $data->save();
         return redirect()->route('list_menu');
     }
+
+////////////////////////////////////////////////////////////////////////////
+    public function show_menu(){
+        $MenuModel = new MenuModel();
+        $data = $MenuModel->get(null,['task'=>'get_all']);
+
+        return view('Homepage.main',['data'=>$data]);
+    }
+    public function detail_menu($id){
+        $MenuModel = new MenuModel();
+        $data = $MenuModel->get($id,['task'=>'menu_with_id']);
+       // return $data;
+        return view('Homepage.detail_menu',['data'=>$data]);
+    }
+
+
 }
