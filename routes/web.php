@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\admin\ManageMenu;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('home/', function () {
-    return ('welcome');
-});
+Route::get('/',[ManageMenu::class,'show_menu'])->name('show_menu');
+Route::get('detail_menu/{id}',[ManageMenu::class,'detail_menu'])->name('detail_menu')
+->where('id','[0-9]+');
+Route::get('choose_table',[ManageMenu::class,'choose_table'] )->name('choose_table');
