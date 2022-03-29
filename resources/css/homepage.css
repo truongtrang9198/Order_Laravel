@@ -1,0 +1,34 @@
+.body{
+    margin-top: 0%;
+    margin-bottom: 0%;
+    margin-left: 0%;
+    margin-right: 0%;
+    background-color: 	white;
+    font-family:tahoma;
+
+}
+.header{
+    background-color: #ee7600;
+}
+
+@media(max-width:768px) {
+    .body{
+        margin-top: 0%;
+        margin-bottom: 0%;
+        margin-left: 0%;
+        margin-right: 0%;
+        background-color: 	white;
+        font-family:tahoma;
+
+    }
+    .header{
+        background-color: #ee7600;
+
+    }
+
+    .card-body-custom h5{
+        font-size: 150%;
+    }
+
+
+}
