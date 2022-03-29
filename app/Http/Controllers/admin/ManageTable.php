@@ -76,7 +76,12 @@
         // $dt->save();
 
         return response()->json(['bool'=> 'True']);
+    }
 
+    public function choose_table(){
+        $Table_order = new Table_order();
+        $items = $Table_order->list();
+        return view('Homepage.choose_table',['items'=>$items]);
     }
 
 
