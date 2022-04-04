@@ -10,8 +10,18 @@
             @include('Homepage.slide_img')
             <br>
             <div class="detail_table">
-                <h5><a href="">Bàn: 4 </a> <a href=""> &nbsp;  <i class="fas fa-receipt"></i></a> </h5>
-
+                <h5>Bàn:
+                    @php
+                    if (empty($table_number)) {
+                          return redirect()->route('/');
+                    }else
+                        echo $table_number;
+                    @endphp
+                    <a href=""> &nbsp;  <i class="fas fa-receipt"></i></a>
+                </h5>
+                    <input type="text" value=" @php
+                    echo $id_table;
+                @endphp" hidden>
             </div>
             @include('Homepage.menu')
         </div>
