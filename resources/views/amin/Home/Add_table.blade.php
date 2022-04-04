@@ -23,7 +23,6 @@
                         }
                 @endphp
 
-
                 </select>
                 <label for="">Mô tả</label>
                 <input type="text" class="form-control" name="descript">
@@ -38,6 +37,7 @@
                 <label for="">Trạng thái</label>
                 <select class="custom-select" name="status" >
                     <option value="Hoạt động" selected>Hoạt động</option>
+                    <option value="Hoạt động" selected>Sẵn sàng</option>
                 </select>
                 <br>
                 <br>
