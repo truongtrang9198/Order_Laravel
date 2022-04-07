@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\CustomerModel as CustomerModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+
 class CustomerController extends Controller
 {
     public function custom_login(Request $request){
@@ -21,8 +22,8 @@ class CustomerController extends Controller
         }
     // lưu trữ session
        // session(['username' => ]);
-        $request->session()->flash('username',$name);
-       // return redirect()->route('choose_table');
-       return "asas";
+        Session::push('username',$name);
+        return redirect()->route('choose_table');
+
     }
 }
