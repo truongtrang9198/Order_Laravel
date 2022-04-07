@@ -14,7 +14,7 @@
             @php
             foreach($items as $item){
                $url = route("menu",["id_table"=>$item->ID_TABLE,"number_table"=>$item->NUMBER_TABLE]);
-
+              //  echo $item->STATUS;
                if ( $item->STATUS == 'Hoạt động') {
                     $tr = '<div class="p-2 m-2 bg-warning"><a href="#" class="button nav-link text-light">'.$item->NUMBER_TABLE.'</a></div>';
                     echo $tr;
