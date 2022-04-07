@@ -7,7 +7,10 @@
     use App\Models\Table_order as Table_order;
     use App\Models\MenuModel as MenuModel;
     use App\Models\BillModel as BillModel;
+    use App\Models\DetailModel as DetailModel;
     use DB;
+    use Carbon\Carbon;
+
     class DetailController extends Controller
 {
 
@@ -16,32 +19,43 @@
         $id_menu = $data['id_menu'];
         $id_table = $data['id_table'];
         $note = $data['note'];
-       $condition = DB::select('call condition_id('.$id_table.')');
+        $time = Carbon::now('Asia/Ho_Chi_Minh');
+      // $condition = DB::select('call condition_id('.$id_table.')');
         // lấy giá tiền
         $menu = MenuModel::find($id_menu);
         $price =  $menu->DISH_PRICE;
-        if($condition ==NULL){
-            // DB::select('call insert_bill('.$id_menu.')');
-            DB::insert('insert into bill (TOTAL,BILL_STATUS) values (?, ?)', [$price,'Chưa thanh toán']);
-            $lastID = DB::getPDO()->lastInsertId();
-            DB::insert('insert into order_detail (ID_TABLE, ID_DISH,ID_BILL,QUANTITY,STATUS_DETAIL,
-            NOTE) values (?,?,?,?,?,?)', [$id_table,$id_menu,$lastID,
-                                                    1,'Tiếp nhận',$note]);
 
-        }else{
-            $id = $condition['ID_BILL'];
-            // Thêm vào order_detail
-            DB::insert('insert into order_detail (ID_TABLE, ID_DISH,ID_BILL,QUANTITY,STATUS_DETAIL,
-            NOTE) values (?,?,?,?,?,?)', [$id_table,$id_menu,$id,
-                                                    1,'Tiếp nhận',$note]);
-            // cộng dồn giá tiền
-            $bill = BillModel::find($id);
+        $data_id = BillModel::getid( $id_table);
+        $id_detail = $data_id[0]->ID_BILL;
+            DB::insert('insert into order_detail (ID_DISH,ID_BILL,QUANTITY,STATUS_DETAIL,
+            NOTE,TIME_ORDER) values (?,?,?,?,?,?)', [$id_menu,$id_detail,
+                                                    1,'Tiếp nhận',$note,$time]);
+        //     // cộng dồn giá tiền
+            $bill = BillModel::find($id_detail);
             $bill->TOTAL = $bill->TOTAL + $price;
             $bill->save();
-        }
 
-        return $condition[0]->ID_BILL;
+
+        return "Gọi món thành công!";
+       //return  $id;
     }
+
+    public function show_bill($id_bill){
+
+        $DetailModel = new DetailModel();
+        $items = $DetailModel->getBill($id_bill);
+
+        // print_r($items);
+       return  view("Homepage.showbill",["items"=>$items]);
+    }
+
+    public function order_process(){
+            $DetailModel = new DetailModel();
+            $data = $DetailModel->order();
+            //return $data;
+        return view("staff.order",["data"=>$data]);
+    }
+
 
 
 
