@@ -82,7 +82,7 @@
    //   $('#ModelNote').show();
       let note = prompt("Thêm ghi chú cho nhân viên");
         $.post("{{route('add_order')}}",{id_menu:id_menu,id_table:id_table,note:note},function(data){
-             console.log(data);
+             alert(data);
         })
     })
 
