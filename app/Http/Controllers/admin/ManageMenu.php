@@ -9,6 +9,8 @@ use App\Models\DishtypeModel as DishtypeModel;
 use App\Models\MenuModel as MenuModel;
 use App\Models\Table_order as Table_order;
 use App\Models\BillModel as  BillModel;
+use DB;
+use Illuminate\Support\Facades\Session;
 class ManageMenu extends Controller
 {
     private $path = "amin.Home.";
@@ -78,17 +80,44 @@ class ManageMenu extends Controller
         $MenuModel = new MenuModel();
         $table = new Table_order();
     // Đặt trạng thái hoạt động của bàn
+
         $datas=Table_order::find($id_table);
-        $datas->STATUS = "Hoạt động";
-        $datas->save();
-        $BillModel = new BillModel();
-        $BillModel->ID_TABLE = $id_table;
-        $BillModel->BILL_STATUS = "Chưa thanh toán";
-        $BillModel->TOTAL = 0;
-        $BillModel->save();
+        if ( $datas->STATUS == "Sẵn sàng") {
+            $datas->STATUS = "Hoạt động";
+            $datas->save();
+            session()->push('id_table',$id_table);
+            session()->push('status',"Hoạt động");
+            $BillModel = new BillModel();
+            $BillModel->ID_TABLE = $id_table;
+            $BillModel->BILL_STATUS = "Chưa thanh toán";
+            $BillModel->TOTAL = 0;
+            $BillModel->save();
+            $lastID = DB::getPdo()->lastInsertID();
+            $data = $MenuModel->get(null,['task'=>'get_all']);
+            return view('Homepage.main',['data'=>$data,'id_table'=>$id_table,'table_number'=>$table_number,'id_bill'=>$lastID]);
+        }
+        else{
+            //return redirect()->back();
+            if (session()->exists('status')) {
+                //
+                $data = $MenuModel->get(null,['task'=>'get_all']);
+                $BillModel = new BillModel();
+                $items = BillModel::where('ID_TABLE',$id_table)->get();
+                $id_bill=$items[0]->ID_BILL;
+               //return $id_bill;
+                return view('Homepage.main',['data'=>$data,'id_table'=>$id_table,'table_number'=>$table_number,'id_bill'=>$id_bill]);
+
+            }else{
+                return redirect()->back();
+            }
+            // return view('Homepage.main',['data'=>$data,'id_table'=>$id_table,'table_number'=>$table_number,'id_bill'=>$lastID]);
+        }
+
+
+
+
     //
-        $data = $MenuModel->get(null,['task'=>'get_all']);
-        return view('Homepage.main',['data'=>$data,'id_table'=>$id_table,'table_number'=>$table_number]);
+
     }
 
 }
