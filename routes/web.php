@@ -21,9 +21,12 @@ Route::get('/', function () {
     return view("Homepage.custom_login");
 });
 Route::post('custom_login/',[CustomerController::class,'custom_login'] )->name('custom_login');
+
 Route::get('detail_menu/{id}',[ManageMenu::class,'detail_menu'])->name('detail_menu')
 ->where('id','[0-9]+');
 Route::get('choose_table/',[ManageTable::class,'choose_table'] )->name('choose_table');
 Route::get('menu/{id_table}/{number_table}/',[ManageMenu::class,'_menu'])->name('menu')
 ->where('id_table','[0-9]+');
-Route::post('add_order',[DetailController::class,'add_order'])->name('add_order');
+Route::post('add_order/',[DetailController::class,'add_order'])->name('add_order');
+Route::get('show_bill/{id_bill}',[DetailController::class,'show_bill'])->name('show_bill');
+Route::get('order_process/',[DetailController::class,'order_process'])->name('order_process');
