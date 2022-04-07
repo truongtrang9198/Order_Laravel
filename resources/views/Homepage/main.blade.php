@@ -17,7 +17,7 @@
                     }else
                         echo $table_number;
                     @endphp
-                    <a href=""> &nbsp;  <i class="fas fa-receipt"></i></a>
+                    <a href="{{route("show_bill",["id_bill"=>$id_bill])}}"> &nbsp;  <i class="fas fa-receipt"></i></a>
                 </h5>
                     <input type="text" value=" @php
                     echo $id_table;
