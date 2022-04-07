@@ -12,6 +12,7 @@ class MenuModel extends Model
     protected $primaryKey = 'ID_DISH';
     public $timestamps = false;
 
+    // relationship
     public function unit()
     {
 
@@ -21,6 +22,14 @@ class MenuModel extends Model
     {
         return $this->belongsTo('App\Models\DishtypeModel','ID_DISH_TYPE','ID_DISH_TYPE');
     }
+
+    public function order_detail()
+    {
+        return $this->hasMany('App\Models\DetailModel','ID_DISH','ID_DISH');
+    }
+
+
+
     public function get($params,$option){
         $result = null;
         if($option['task']=="get_all"){
