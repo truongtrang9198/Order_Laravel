@@ -5,11 +5,13 @@ use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use DB;
+
 class StaffModel extends Model
 {
     protected $table  = 'staff';
     protected $primaryKey = 'ID_STAFF';
     public $timestamps = false;
+    protected $fillable = ['STAFF_PHONE','STAFF_PWD'];
     protected $hidden = [
         'STAFF_PWD',
         'remember_token',
