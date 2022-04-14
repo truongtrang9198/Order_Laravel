@@ -70,7 +70,7 @@ return [
         ],
         'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\StaffModel::class,
+            'model' => App\Models\User::class,
         ],
 
         // 'users' => [
@@ -117,3 +117,4 @@ return [
     'password_timeout' => 10800,
 
 ];
+
