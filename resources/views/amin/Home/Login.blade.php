@@ -11,7 +11,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
                 </div>
-                <input type="text" class="form-control input-admin" placeholder="Phone number" name="phone"
+                <input type="text" class="form-control input-admin" placeholder="Phone number" name="STAFF_PHONE"
                     aria-describedby="basic-addon1">
             </div>
             <br>
@@ -19,7 +19,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
                 </div>
-                <input type="password" class="form-control input-admin" placeholder="Password" name="password"
+                <input type="password" class="form-control input-admin" placeholder="Password" name="STAFF_PWD"
                     aria-describedby="basic-addon1">
             </div>
             @if ($errors->any())
@@ -27,8 +27,13 @@
                 @endif
 
                 <br>
-                <button type="submit" class="btn btn-admin-login">Login</button>
+                <button type="submit" class="btn btn-admin-login btn-light" id="">Login</button>
         </form>
+        @if (session('error'))
+        <div class="alert alert-dark text-center" role="alert">
+                {{ session('error') }}
+        </div>
+    @endif
     </div>
 
 </div>
