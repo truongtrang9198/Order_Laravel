@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\StaffModel as StaffModel;
+use DB;
+use App\Models\User as User;
+
 class LoginController extends Controller
 {
     public function login(Request $request)
@@ -23,21 +26,30 @@ class LoginController extends Controller
         // }
     }
     public function getlogin(Request $request){
-        $phone = $request->phone;
-        $password = $request->password;
-        $password =  bcrypt($password);
-        $StaffModel = new StaffModel();
+        $phone = $request->STAFF_PHONE;
+        $password = $request->STAFF_PWD;
+       // $password =  bcrypt($password);
+        $StaffModel = new User();
+       // echo bcrypt(123456);
+      //  dd($request->only('STAFF_PHONE','STAFF_PWD'));
+        $i = User::where('STAFF_PHONE',$phone)
+                ->where('active',1)
+                ->count();
 
-        $i = $StaffModel::where('STAFF_PHONE',$phone)->count();
+
         if($i!=0){
-            $pwd = $StaffModel::get();
-            return $pwd;
+          // $pwd = DB::select("select STAFF_PWD from staff where STAFF_PHONE = $phone");
+         //  $password_db = $pwd[0]->STAFF_PWD;
+
+        dd(Auth::attempt(['STAFF_PHONE'=>$phone,'STAFF_PWD'=>$password,
+                                           'active'=>1]));
+          // dd(Auth::attempt($request->only('STAFF_PHONE','STAFF_PWD')));
+           if(Auth::guard('admin')->attempt($request->only('STAFF_PHONE','STAFF_PWD')));
+
+        }else{
+
+            return redirect()->route('login')->with('error',('Số điện thoại không chính xác'));
         }
 
-        //return $i;
-        // if($i==0)
-        //     return redirect()->back()->withErrors(['err_mess'=>'Số điện thoại hoặc mật khẩu không chính xác!']);
-        // else
-        //     return redirect()->rouet("ManageStaff");
     }
 }
