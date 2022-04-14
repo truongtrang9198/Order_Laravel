@@ -25,7 +25,9 @@ class DetailModel extends Model
 
     public function getBill($id_bill){
 
-        $data = DB::select("call show_bill(".$id_bill.")");
+        $detail = DB::select("call show_bill(".$id_bill.")");
+        $bill = DB::select("select ID_BILL,TOTAL,BILL_STATUS from bill where ID_BILL = $id_bill");
+
     //     $data = DetailModel::with('menu')->where('ID_BILL',$id_bill)
     //                                     ->get();
     //    //$total = DetailModel::with('bill')->where('ID_BILL',$id_bill)
@@ -36,7 +38,7 @@ class DetailModel extends Model
     //    // $arr['menu'] = $data;
     //   //  $arr[1] = $total;
     //     return ["data"=>$data,'total'=>$total,"bill_status"=>$bill_status];
-        return $data;
+        return ["detail"=>$detail,"bill"=>$bill];
     }
 
     public function order(){
