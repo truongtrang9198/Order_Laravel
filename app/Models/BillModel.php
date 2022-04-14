@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use DB;
 class BillModel extends Model
 {
     use HasFactory;
@@ -24,5 +24,14 @@ class BillModel extends Model
                         ->get('ID_BILL');
 
         return $data;
+    }
+
+    public function get_all_bill(){
+        $items = DB::select("select ID_BILL,TOTAL,BILL_STATUS,fee,Time_start,NUMBER_TABLE
+                    from bill
+                    inner join table_order
+                    on bill.ID_TABLE = table_order.ID_TABLE");
+
+        return $items;
     }
 }
