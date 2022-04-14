@@ -7,6 +7,7 @@
        //$url_detail = "eeer0";
      //  echo  $url_detail;
         $price = number_format($dt->DISH_PRICE);
+      $s = '';
       $tr='
         <div class="card mb-3 ">
 
@@ -20,43 +21,28 @@
                 <div class="card-body card-body-custom">
                 <h5 class="card-title">'.$dt->DISH_NAME.'</h5>
                 <span class="text-muted">Loại: '.$dt->DISH_TYPE_NAME.' </span> <br>
-                <span class="text-danger text-bold">'.$price.'VND/'.$dt->UNIT_NAME.'</span> <br>
-                <button type="submit" class="btn btn-outline-primary"><i class="fas fa-utensils"></i></button>
-                &nbsp; <a href="'.$url_detail.'">Chi tiết</a>
+                <span class="text-danger text-bold">'.$price.' VND/'.$dt->UNIT_NAME.'</span> <br>';
+            if($dt->DISH_STATUS == "Phục vụ"){
+                $s='<button type="submit" class="btn btn-outline-primary"><i class="fas fa-utensils"></i></button>';
+            } else {
+                $s='<button type="submit" class="btn btn-outline-danger" disabled="disabled"><i class="fas fa-ban"></i></button>';
+            }
+
+            $s2='&nbsp; <a href="'.$url_detail.'">Chi tiết</a>
                 </div>
-
                 <input type="text" name="id_menu" value="'.$dt->ID_DISH.'" hidden>
-
-                </form>
+              </form>
             </div>
             </div>
         </div>';
-        echo $tr;
+        echo $tr.$s.$s2;
 }
 @endphp
 
 <input type="text" name="id_table" id="id_table" value="@php
     echo $id_table;
 @endphp" hidden>
-{{-- <div class="modal fade" id="ModelNote" role="dialog">
-    <div class="modal-dialog">
 
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Thêm ghi chú: </h4>
-        </div>
-        <div class="modal-body">
-            <input type="text" id="note">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Gọi món</button>
-        </div>
-      </div>
-
-    </div>
-  </div> --}}
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
