@@ -44,9 +44,11 @@
 
         $DetailModel = new DetailModel();
         $items = $DetailModel->getBill($id_bill);
-
-        // print_r($items);
-       return  view("Homepage.showbill",["items"=>$items]);
+        $detail = $items['detail'];
+        $bill = $items['bill'];
+        //return $bill;
+       //print_r($items);
+       return  view("Homepage.showbill",["detail"=>$detail,"bill"=>$bill]);
     }
 
     public function order_process(){
@@ -56,7 +58,15 @@
         return view("staff.order",["data"=>$data]);
     }
 
+    public function confirm(Request $request){
 
+        $status = $request['form_data'][0]['value'];
+        $id_detail = $request['form_data'][1]['value'];
+        $DetailModel = DetailModel::find($id_detail);
+        $DetailModel->STATUS_DETAIL = $status;
+        $DetailModel->save();
+        return "Susscess";
+    }
 
 
 }
