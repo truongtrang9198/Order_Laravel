@@ -5,6 +5,8 @@ use App\Http\Controllers\admin\ManageMenu;
 use App\Http\Controllers\admin\ManageTable;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\BillController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,3 +32,7 @@ Route::get('menu/{id_table}/{number_table}/',[ManageMenu::class,'_menu'])->name(
 Route::post('add_order/',[DetailController::class,'add_order'])->name('add_order');
 Route::get('show_bill/{id_bill}',[DetailController::class,'show_bill'])->name('show_bill');
 Route::get('order_process/',[DetailController::class,'order_process'])->name('order_process');
+Route::post('confirm/',[DetailController::class,'confirm'])->name('confirm');
+
+Route::post('get-confirm/',[BillController::class,'get_confirm'])->name('get-confirm');
+Route::get('page_payment/',[BillController::class,'page_payment'])->name('page_payment');
