@@ -5,7 +5,7 @@
 
    <body>
      <input type="text" id="id_table" value="@php echo $id; @endphp" name="id_table" hidden>
-     <img src="{{asset('\storage\app\img\gif_delete.gif')}}" alt="" id="loading">
+     <img src="{{asset('http://localhost/Order_Laravel/storage/app/img/gif_delete.gif')}}" alt="" id="loading">
    </body>
 
  @endsection
