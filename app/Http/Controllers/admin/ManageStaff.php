@@ -10,6 +10,7 @@ use App\Models\DistrictModel as DistrictModel;
 use App\Models\StaffModel as StaffModel;
 use App\Models\AddressModel as AddressModel;
 use App\Models\PositionModel as PositionModel;
+use Illuminate\Support\Facades\Hash;
 class ManageStaff extends Controller
 {
     //
@@ -84,7 +85,7 @@ class ManageStaff extends Controller
         $StaffModel->ID_POSITION= $data['position'];
         $StaffModel->START_DAY = Carbon::now();
         // Xử lý mật khẩu
-        $StaffModel->STAFF_PWD = bcrypt($data['pwd']);
+        $StaffModel->STAFF_PWD = Hash::make($data['pwd']);
         $path = $request->img_staff->move('img/staff');
         $StaffModel->STAFF_IMG = $path;
         $StaffModel->save();
