@@ -13,7 +13,6 @@
                         <th>Thời gian</th>
                         <th>Trạng thái</th>
                         <th></th>
-                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -27,16 +26,10 @@
                                     <td>'.$dt->TIME_ORDER.'</td>
                                     <td>'.$dt->STATUS_DETAIL.'</td>
                                     <form action="" class="form-confirm">
-                                    <td>
-                                        <select name="status" id="" class="custom-select">
-                                            <option value="Hoàn tất">Hoàn tất</option>
-                                            <option value="Hết món">Hết món</option>
-
-                                        </select>
-                                    </td>
-
-                                    <td><button type="submit" value="'.$dt->ID_DETAIL.'"  class="btn btn-outline-primary btn-click">Xác nhận</button></td>
-                                </form>
+                                    <td><button type="submit" class="btn btn-outline-primary btn-click">Làm xong</button></td>
+                                    <input type="text" name="status" value="Hoàn thành" hidden>
+                                    <input type="text" name="id_detail" value="'.$dt->ID_DETAIL.'" hidden>
+                                    </form>
                                     </tr>
                                 ';
                                 echo $str;
@@ -67,6 +60,14 @@
         $(".form-confirm").submit(function(event){
             event.preventDefault();
 
+            var form_data = $(this).serializeArray();
+
+            $.post("{{route('confirm')}}",{form_data:form_data},function(data){
+                console.log(data);
+                location.reload();
+
+            })
+          // console.log(form_data);
         });
      })
  </script>
