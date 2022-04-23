@@ -1,5 +1,4 @@
 
-
 @extends('Homepage.Home')
 @section('tile', 'Welcome')
 @section('main')
