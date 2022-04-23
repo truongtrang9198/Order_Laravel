@@ -27,10 +27,11 @@ class BillModel extends Model
     }
 
     public function get_all_bill(){
-        $items = DB::select("select ID_BILL,TOTAL,BILL_STATUS,fee,Time_start,NUMBER_TABLE
+        $items = DB::select("select ID_BILL,TOTAL,BILL_STATUS,bill.ID_TABLE,fee,Time_start,NUMBER_TABLE,DISCOUNT
                     from bill
                     inner join table_order
-                    on bill.ID_TABLE = table_order.ID_TABLE");
+                    on bill.ID_TABLE = table_order.ID_TABLE
+                    where bill.BILL_STATUS != 'Đã thanh toán'");
 
         return $items;
     }
