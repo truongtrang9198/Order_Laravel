@@ -29,8 +29,13 @@
     .card-body-custom h5{
         font-size: 150%;
     }
+    .card-body-custom1 h5{
+        font-size: 150%;
+    }
     #form-login{
         padding-left: 100px;
     }
+
+
 
 }
