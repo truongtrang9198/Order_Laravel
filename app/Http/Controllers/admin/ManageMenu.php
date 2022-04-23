@@ -102,7 +102,8 @@ class ManageMenu extends Controller
                 //
                 $data = $MenuModel->get(null,['task'=>'get_all']);
                 $BillModel = new BillModel();
-                $items = BillModel::where('ID_TABLE',$id_table)->get();
+                $items = BillModel::where('ID_TABLE',$id_table)
+                                    ->where('BILL_STATUS','Chưa thanh toán')->get();
                 $id_bill=$items[0]->ID_BILL;
                //return $id_bill;
                 return view('Homepage.main',['data'=>$data,'id_table'=>$id_table,'table_number'=>$table_number,'id_bill'=>$id_bill]);
