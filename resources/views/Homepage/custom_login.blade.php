@@ -11,7 +11,7 @@
             <label for="">Tên</label>
                 <input type="text" id="name" name="name" class="form-control">
                 <label for="">Số điện thoại</label>
-                <input type="text" id="phone" name="phone"class="form-control">
+                <input type="text" id="phone" name="phone"class="form-control"  pattern="(0)+([0-9]{9})">
             <br>
                 <button class="btn btn-warning" type="submit">Tiếp</button>
                 <button class="btn btn-info" onClick="{{route('choose_table')}}">Bỏ qua</button>
