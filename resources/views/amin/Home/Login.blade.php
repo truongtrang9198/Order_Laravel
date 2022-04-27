@@ -11,16 +11,14 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
                 </div>
-                <input type="text" class="form-control input-admin" placeholder="Phone number" name="STAFF_PHONE"
-                    aria-describedby="basic-addon1">
+                <input type="text" class="form-control input-admin" placeholder="Phone number" name="STAFF_PHONE" pattern="(0)+([0-9]{9})">
             </div>
             <br>
             <div class="input-group mb3 input-admin">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
                 </div>
-                <input type="password" class="form-control input-admin" placeholder="Password" name="STAFF_PWD"
-                    aria-describedby="basic-addon1">
+                <input type="password" class="form-control input-admin" placeholder="Password" name="STAFF_PWD">
             </div>
             @if ($errors->any())
                 <span class="text-muted">{{ $errors->first() }}</span>
