@@ -22,7 +22,7 @@ use App\Http\Controllers\CommentController;
 // Route::get('/',[ManageMenu::class,'show_menu'])->name('show_menu');
 Route::get('/', function () {
     return view("Homepage.custom_login");
-});
+})->name('begin');
 Route::post('custom_login/',[CustomerController::class,'custom_login'] )->name('custom_login');
 Route::post('custom_login2/',[CustomerController::class,'custom_login2'] )->name('login2');
 
@@ -43,3 +43,5 @@ Route::get('Comment/check_condition',[CommentController::class,'check_condition'
 // Route::get('Comment/{id_bill}',[CommentController::class,'check_condition'])->name('go_cmt')
 // ->where('id_bill','[0-9]+');
 Route::get('Comment/comment/{id_bill}',[CommentController::class,'go_comment'])->name('go_cmt');
+Route::post('Comment/insert_cmt',[CommentController::class,'insert_cmt'])->name('insert_cmt');
+Route::get('exit/',[CustomerController::class,'exit'])->name('exit');
