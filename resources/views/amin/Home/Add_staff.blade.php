@@ -27,7 +27,7 @@
             </div>
             <div class="col-4">
                 <label for="">Số điện thoại</label>
-                <input type="text" class="form-control" name="phone" id="phone" required pattern="[0-9]{10}">
+                <input type="text" class="form-control" name="phone" id="phone" required pattern="(0)+([0-9]{9})">
                 {{-- Lấy dữ liệu từ server --}}
                 <label for="">Tỉnh/Thành phố</label>
                 <select class="custom-select" id="city">
