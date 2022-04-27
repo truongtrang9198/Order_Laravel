@@ -49,7 +49,7 @@ class ManageStaff extends Controller
         $items = $StaffModel ->getData(null,['task'=>"get-all"]);
         return view('amin.Home.list_staff',['items'=>$items]);
     }
-// Kiểm tra kết nối database
+
     public function add(){
         $CityModel = new CityModel();// lấy hết giá trị trong bảng city = select * from city;
         $PositionModel = new PositionModel();
