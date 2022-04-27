@@ -38,12 +38,19 @@ class BillController extends Controller
         $data->BILL_STATUS  = "Đã thanh toán";
         $data->	Time_end  = $date;
         $data->save();
+
+    // Tích điểm
+        if(session('id_customer') !=''){
+            $paid = round($re->paid/g100000);
+        }
+
        // đặt trạng thái trong bảng table
 
        $id_table = $re->id_table;
        $table = Table_order::find($id_table);
        $table->STATUS = "Sẵn sàng";
        $table->save();
+
         return "Success";
     }
 }
