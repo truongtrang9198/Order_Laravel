@@ -24,7 +24,7 @@ class CustomerController extends Controller
             $items = CustomerModel::where('PHONE',$phone)
                     ->get();
             foreach ($items as $item)
-                $id_customer = $item->PHONE;
+                $id_customer = $item->ID_CUSTOMERS;
         }
     // lưu trữ session
        // session(['username' => ]);
@@ -60,5 +60,11 @@ class CustomerController extends Controller
         session(['id_customer' => $id_customer]);
         return session('username');
 
+    }
+
+    public function exit(){
+        session(['username' => '']);
+        session(['id_customer' => '']);
+        return redirect()->route('begin');
     }
 }
