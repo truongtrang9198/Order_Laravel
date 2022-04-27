@@ -73,12 +73,13 @@
                 <button type="button" class="btn btn-primary" onclick="window.location.reload();">Tải lại</button>
                 <br>
                 <div id="hidden_cmt" class="collapse" >
-                   <a href="@php echo $url; @endphp">Bình luận đánh giá</a>
-
+                   <a href="@php echo $url; @endphp">Bình luận đánh giá</a> &nbsp;
+                    <a href="{{route('exit')}}">Thoát</a>
                 </div>
-                <br>
 
                 <div  class="collapse" id="ask_login">
+                    <br>
+                     <br>
                     <p class="text-muted">Đăng nhập để đánh giá món ăn?</p>
                     <button class="btn btn-info" data-toggle="modal" data-target="#modal_login">Đăng nhập</button>
                 </div>
@@ -107,7 +108,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" ><i class="fas fa-phone"></i></span>
                         </div>
-                        <input type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại">
+                        <input type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại" required pattern="(0)+([0-9]{9})">
                       </div>
 
                       <button type="submit" class="btn btn-info">Đăng nhập</button>
@@ -170,6 +171,12 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
            console.log(data);
         })
     })
+
+    // $('#btn_exit').click(function(){
+    //     $.get("{{route('exit')}}",{},function(data){
+    //         $(this).attr("href", newUrl);
+    //     })
+    // })
 
 });
 </script>
