@@ -63,8 +63,27 @@ class CustomerController extends Controller
     }
 
     public function exit(){
-        session(['username' => '']);
-        session(['id_customer' => '']);
+        session()->forget('username');
+        session()->forget('id_customer');
+
+        // session(['username' => '']);
+        // session(['id_customer' => '']);
         return redirect()->route('begin');
+    }
+
+    public function check_discount(){
+        if(session()->exists('id_customer') && session('id_customer')!=''){
+            $id_customer = session('id_customer');
+            $condition = CustomerModel::where('ID_CUSTOMERS',$id_customer)
+                                        ->get();
+           // dd($condition);
+           foreach ($condition as $item)
+                $point = $item->POINT_TOTAL;
+
+           // $point = $condition->POINT_TOTAL;
+            return  $point;
+        }else{
+            return "Null";
+        }
     }
 }
