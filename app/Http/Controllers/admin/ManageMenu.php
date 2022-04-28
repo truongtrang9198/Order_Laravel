@@ -66,9 +66,12 @@ class ManageMenu extends Controller
     public function show_menu(){
         $MenuModel = new MenuModel();
         $data = $MenuModel->get(null,['task'=>'get_all']);
-
-        return view('Homepage.main',['data'=>$data]);
+        $DishtypeModel = new DishtypeModel();
+        $type = $DishtypeModel->get_all();
+      //  dd($type);
+        return view("Homepage.main",["data"=>$data,"type"=>$type]);
     }
+
     public function detail_menu($id){
         $MenuModel = new MenuModel();
         $data = $MenuModel->get($id,['task'=>'menu_with_id']);
@@ -94,7 +97,10 @@ class ManageMenu extends Controller
             $BillModel->save();
             $lastID = DB::getPdo()->lastInsertID();
             $data = $MenuModel->get(null,['task'=>'get_all']);
-            return view('Homepage.main',['data'=>$data,'id_table'=>$id_table,'table_number'=>$table_number,'id_bill'=>$lastID]);
+            $DishtypeModel = new DishtypeModel();
+            $type = $DishtypeModel->get_all();
+            return view('Homepage.main',['data'=>$data,'id_table'=>$id_table,
+            'table_number'=>$table_number,'id_bill'=>$lastID,"type"=>$type]);
         }
         else{
             //return redirect()->back();
@@ -106,7 +112,10 @@ class ManageMenu extends Controller
                                     ->where('BILL_STATUS','Chưa thanh toán')->get();
                 $id_bill=$items[0]->ID_BILL;
                //return $id_bill;
-                return view('Homepage.main',['data'=>$data,'id_table'=>$id_table,'table_number'=>$table_number,'id_bill'=>$id_bill]);
+               $DishtypeModel = new DishtypeModel();
+               $type = $DishtypeModel->get_all();
+                return view('Homepage.main',['data'=>$data,'id_table'=>$id_table,
+                'table_number'=>$table_number,'id_bill'=>$id_bill,"type"=>$type]);
 
             }else{
                 return redirect()->back();
@@ -114,11 +123,14 @@ class ManageMenu extends Controller
             // return view('Homepage.main',['data'=>$data,'id_table'=>$id_table,'table_number'=>$table_number,'id_bill'=>$lastID]);
         }
 
-
-
-
-    //
-
+    }
+    public function menu_type(Request $re){
+        $id_dish_type = $re->dish_type;
+        $id_table = $re->id_table;
+       // dd($id_table);
+        $MenuModel = new MenuModel();
+        $data = $MenuModel->get($id_dish_type,['task'=>'menu_type']);
+        return view("Homepage.menu_type",["data"=>$data,"id_table"=>$id_table]);
     }
 
 }
