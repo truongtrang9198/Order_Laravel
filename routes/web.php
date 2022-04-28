@@ -31,8 +31,11 @@ Route::get('detail_menu/{id}',[ManageMenu::class,'detail_menu'])->name('detail_m
 Route::get('choose_table/',[ManageTable::class,'choose_table'] )->name('choose_table');
 Route::get('menu/{id_table}/{number_table}/',[ManageMenu::class,'_menu'])->name('menu')
 ->where('id_table','[0-9]+');
+Route::get('menu_type/',[ManageMenu::class,'menu_type'] )->name('menu_type');
+
 Route::post('add_order/',[DetailController::class,'add_order'])->name('add_order');
 Route::get('show_bill/{id_bill}',[DetailController::class,'show_bill'])->name('show_bill');
+Route::get('show_bill1/{id_bill}',[DetailController::class,'show_bill1'])->name('show_bill1');
 Route::get('order_process/',[DetailController::class,'order_process'])->name('order_process');
 Route::post('Staff/confirm/',[DetailController::class,'confirm'])->name('confirm');
 
@@ -45,3 +48,4 @@ Route::get('Comment/check_condition',[CommentController::class,'check_condition'
 Route::get('Comment/comment/{id_bill}',[CommentController::class,'go_comment'])->name('go_cmt');
 Route::post('Comment/insert_cmt',[CommentController::class,'insert_cmt'])->name('insert_cmt');
 Route::get('exit/',[CustomerController::class,'exit'])->name('exit');
+Route::get('check_discount/',[CustomerController::class,'check_discount'])->name('check_discount');
