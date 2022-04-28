@@ -42,13 +42,24 @@
 
     public function show_bill($id_bill){
 
-        $DetailModel = new DetailModel();
-        $items = $DetailModel->getBill($id_bill);
+        $BillModel = new BillModel();
+        $items = $BillModel->getBill($id_bill);
         $detail = $items['detail'];
         $bill = $items['bill'];
         //return $bill;
        //print_r($items);
        return  view("Homepage.showbill",["detail"=>$detail,"bill"=>$bill]);
+    }
+
+    public function show_bill1($id_bill){
+
+        $BillModel = new BillModel();
+        $items = $BillModel->getBill($id_bill);
+        $detail = $items['detail'];
+        $bill = $items['bill'];
+        //return $bill;
+       //print_r($items);
+       return  view("Homepage.showbill1",["detail"=>$detail,"bill"=>$bill]);
     }
 
     public function order_process(){
