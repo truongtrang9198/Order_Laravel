@@ -222,7 +222,7 @@
             $('#discount').val(discount);
             $('#id_bill_temp').val(id_bill);
             $('#id_table_temp').val(id_table);
-             paid = parseInt(total) - parseFloat(discount*0,01*total) + parseInt(fee);
+             paid = parseInt(total) + parseInt(fee);
             $('#paid').val(paid);
             //$('#paid').val(paid);
             $("#myModal").modal();
@@ -232,7 +232,7 @@
                  discount = $('#discount').val();
 
                 var money_in = $('#money-in').val();
-                paid = parseInt(total) - parseFloat(discount*0,01*total) + parseInt(fee);;
+                paid = parseInt(total)  + parseInt(fee);;
                 //let paid_ = numberFormat.format(paid);
                 $('#paid').val(paid);
                 excess_cash = money_in - parseInt(paid);
