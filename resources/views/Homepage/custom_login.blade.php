@@ -9,12 +9,12 @@
           <form action="{{route('custom_login')}}" method="POST" class="form-group" id="form-login">
             @csrf
             <label for="">Tên</label>
-                <input type="text" id="name" name="name" class="form-control">
+                <input type="text" id="name" name="name" class="form-control" required>
                 <label for="">Số điện thoại</label>
-                <input type="text" id="phone" name="phone"class="form-control"  pattern="(0)+([0-9]{9})">
+                <input type="text" id="phone" name="phone"class="form-control" required pattern="(0)+([0-9]{9})">
             <br>
-                <button class="btn btn-warning" type="submit">Tiếp</button>
-                <button class="btn btn-info" onClick="{{route('choose_table')}}">Bỏ qua</button>
+            <a class="btn btn-info" role="button" href="{{route('choose_table')}}">Bỏ qua</a>
+            <button class="btn btn-warning" type="submit">Đăng nhập</button>
           </form>
         </div>
 
