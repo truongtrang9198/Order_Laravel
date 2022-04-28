@@ -17,6 +17,13 @@ class BillModel extends Model
     {
         return $this->hasMany('App\Models\DetailModel','ID_BILL','ID_BILL');
     }
+    public function getBill($id_bill){
+
+        $detail = DB::select("call show_bill(".$id_bill.")");
+        $bill = DB::select("select ID_BILL,TOTAL,BILL_STATUS,fee,DISCOUNT from bill where ID_BILL = $id_bill");
+
+        return ["detail"=>$detail,"bill"=>$bill];
+    }
 
     public function getid($id){
         $data = BillModel::where('ID_TABLE',$id)
