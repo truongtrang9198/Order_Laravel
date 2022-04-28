@@ -7,17 +7,33 @@ use App\Models\BillModel as BillModel;
 use App\Models\PaymentModel as PaymentModel;
 use Carbon\Carbon;
 use App\Models\Table_order as Table_order;
+use App\Models\CustomerModel as CustomerModel;
+
+use DB;
 class BillController extends Controller
 {
     public function get_confirm(Request $request){
         $id_bill = $request->id_bill;
+        $discount = $request->discount;
         $billmodel = new BillModel();
         $data = BillModel::find($id_bill);
+       // dd( $data);
         $data->BILL_STATUS = "Chờ thanh toán";
+        if(session('id_customer') !='' && $discount!=''){
+            $id_customer = session('id_customer');
+            $data->DISCOUNT = $discount;
+            $data->PAY = ((int)$data->TOTAL - round($discount*0.01* (int)$data->TOTAL)) + (int)$data->fee;
+            // Sửa điểm trong bảng customer
+            $cs = CustomerModel::find($id_customer);
+            $cs->POINT_TOTAL = $cs->POINT_TOTAL -$discount;
+            $cs->save() ;
+        }
+
         $data->save();
+
         session()->push('id_table','');
         session()->push('status',"");
-        return "Susscess";
+        return redirect()->route('show_bill1',['id_bill'=>$id_bill]);
     }
 
     public function page_payment(){
@@ -36,13 +52,24 @@ class BillController extends Controller
         $data->PAY = $re->paid;
         $data->ID_PAYMENT   = $re->payment_type ;
         $data->BILL_STATUS  = "Đã thanh toán";
-        $data->	Time_end  = $date;
-        $data->save();
+        $data->Time_end  = $date;
+        $point = round($re->paid/100000);
+        $data->point = $point;
 
-    // Tích điểm
+        $data->save();
+        $discount = $data->DISCOUNT;
+    // lưu dữ liệu vào bảng history_customer, cộng dồn điểm trong bảng customer
         if(session('id_customer') !=''){
-            $paid = round($re->paid/g100000);
+            $id_customer = session('id_customer');
+            DB::insert("insert history_customer(ID_CUSTOMERS,ID_BILL,POINT_USED)
+               values($id_customer,$id_bill,$discount)");
+            $cs = CustomerModel::find($id_customer);
+            $cs->POINT_TOTAL += $point;
+            $cs->save();
+
         }
+
+
 
        // đặt trạng thái trong bảng table
 
@@ -54,3 +81,8 @@ class BillController extends Controller
         return "Success";
     }
 }
+
+
+
+
+
