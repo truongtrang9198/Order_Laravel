@@ -46,6 +46,11 @@ class MenuModel extends Model
           //  $result = collect($result1)->all();
             //print_r($result);
         }
+
+        if($option['task']=="menu_type"){
+            $id_type_dish = $params;
+            $result = DB::select('call menu_type('.$id_type_dish.')');
+        }
         return $result;
     }
 
