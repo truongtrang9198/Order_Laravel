@@ -12,7 +12,11 @@
             <div>
             <img src="{{asset('order.png')}}" alt="" >
             <br>
-             <span class="text-light"><i class="fas fa-user-check"></i></span>
+             <span class="text-light"><i class="fas fa-user-check"></i>
+                @if (session('username') != '')
+                        <span>{{ session('username')}} </span>
+             @endif
+             </span>
             </div>
             <div class="slide_img">
 
