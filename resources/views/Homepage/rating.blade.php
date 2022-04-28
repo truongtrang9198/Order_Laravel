@@ -147,7 +147,7 @@ foreach ($data as $dt)
             let id_dish = form_data[0]['value'];
             let content = form_data[1]['value'];
             let id_detail = form_data[2]['value'];
-            alert(id_detail);
+            //alert(id_detail);
            // let id_bill = $('#id_bill').val();
            // alert(id_bill);
            // console.log(content);
