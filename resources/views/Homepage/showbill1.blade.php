@@ -173,8 +173,8 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
         let phone = $('#phone').val();
         let name = $('#name').val();
         $.post("{{route('login2')}}",{phone:phone,name:name},function(data){
-           // location.reload();
-           console.log(data);
+            location.reload();
+           //console.log(data);
         })
     })
 
