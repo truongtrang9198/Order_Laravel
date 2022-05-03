@@ -8,7 +8,7 @@ use App\Models\PaymentModel as PaymentModel;
 use Carbon\Carbon;
 use App\Models\Table_order as Table_order;
 use App\Models\CustomerModel as CustomerModel;
-
+use Illuminate\Support\Facades\Auth;
 use DB;
 class BillController extends Controller
 {
@@ -28,6 +28,8 @@ class BillController extends Controller
             $cs->POINT_TOTAL = $cs->POINT_TOTAL -$discount;
             $cs->save() ;
         }
+        $discount=0;
+        DB::select("call proc_pay($id_bill,$discount)");
         $data->DISCOUNT = $discount;
         $data->save();
 
@@ -45,6 +47,7 @@ class BillController extends Controller
     }
 
     public function confirmed(Request $re){
+        $id_staff = Auth::guard('admin')->id();
        // đặt trạng thái trong bảng bill
         $id_bill = $re->id_bill;
         $date = Carbon::now('Asia/Ho_Chi_Minh');
@@ -55,9 +58,13 @@ class BillController extends Controller
         $data->Time_end  = $date;
         $point = round($re->paid/100000);
         $data->point = $point;
-
+        $data->ID_STAFF = $id_staff;
         $data->save();
         $discount = $data->DISCOUNT;
+        if($discount ==NULL){
+            $discount =0;
+        }
+
     // lưu dữ liệu vào bảng history_customer, cộng dồn điểm trong bảng customer
         if(session('id_customer') !=''){
             $id_customer = session('id_customer');
@@ -79,6 +86,22 @@ class BillController extends Controller
        $table->save();
 
         return "Success";
+    }
+
+    public function chart(){
+        $BillModel = new BillModel();
+        $data = $BillModel->get_chart() ;
+        return view("amin.Home.chart",["data"=>$data]);
+    }
+
+    public function end_of(){
+        $date = Carbon::now('Asia/Ho_Chi_Minh');
+        $id_staff = Auth::guard('admin')->id();
+        $billmodel = new BillModel();
+        $sum = $billmodel->staff_end($id_staff);
+        $detail = BillModel::where('ID_STAFF',$id_staff)
+                            ->get(['ID_BILL','PAY']);
+        return view("staff.end_of_shift",["sum"=>$sum,"detail"=>$detail,"date"=>$date]);
     }
 }
 
