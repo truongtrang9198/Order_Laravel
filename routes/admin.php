@@ -5,17 +5,20 @@ use App\Http\Controllers\admin\ManageTable;
 use App\Http\Controllers\admin\adminController;
 use App\Http\Controllers\admin\ManageMenu;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\BillController;
+use App\Http\Controllers\DetailController;
 
 
 Route::get('/', [LoginController::class,'login'])->name('login');
-Route::get('getlogin/', [LoginController::class,'getLogin'])->name('getlogin');
+Route::post('getlogin/', [LoginController::class,'getLogin'])->name('getlogin');
    // quản lý nhân viên
 
-Route::get('home/', [ManageStaff::class,'list'])->name('show');
+Route::get('home/', [ManageStaff::class,'list'])->name('home');
 
 Route::prefix('ManageStaff')->group(function () {
     Route::get('home/',[ManageStaff::class,'list'])->name("ManageStaff");
-    Route::get('add/',[ManageStaff::class,'add'])->name('add_staff');
+    Route::get('add/',[ManageStaff::class,'add'])->name('add_staff')
+    ->middleware('check_login::class');
     Route::get('index/',[ManageStaff::class,'index'])->name('index'); // kiem tra ket noi database
     // Route::get('/', function () {
     //     return view("amin.Home.Login");
@@ -64,7 +67,15 @@ Route::prefix('ManageStaff')->group(function () {
         ->where('id','[0-9]+');
     });
 
+Route::prefix('Staff')->group(function (){
+    Route::post('confirm/',[DetailController::class,'confirm'])->name('confirm');
+    Route::get('order_process/',[DetailController::class,'order_process'])->name('order_process');
+    Route::get('page_payment/',[BillController::class,'page_payment'])->name('page_payment');
+    Route::post('confirmed/',[BillController::class,'confirmed'])->name('confirmed');
+    Route::get('status_menu/',[ManageMenu::class,'status_menu'])->name('status_menu');
+    Route::get('handling_update_status/',[ManageMenu::class,'handling_update_status'])->name('handling_update_status');
 
 
+})
 
 ?>
