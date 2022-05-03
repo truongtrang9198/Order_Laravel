@@ -47,13 +47,20 @@
                             foreach($bill as $b){
                                $tr ='  <tr>
                                 <td  class="text-muted"><small>Giảm giá</small></td>
-                                <td colspan="2" class="text-right"><small>'.$b->DISCOUNT.'</small></td> </tr>
+                                <td colspan="2" class="text-right"><small>'.$b->DISCOUNT.'%</small></td> </tr>
                                 <tr>
                                 <td class="text-muted"><small>Phụ thu</small></td>
                                 <td colspan="2" class="text-right"><small>'.$b->fee.'</small></td> </tr>
                                 <tr>
                                 <td scope="row" class=" text-muted">Tổng</td>
                                 <td colspan="2" class="text-right"> <b> '.number_format($b->TOTAL).'
+                                     </b></td>
+                                     </tr>
+                                <tr>
+
+                                    <tr>
+                                <td scope="row" class=" text-muted">Thanh toán</td>
+                                <td colspan="2" class="text-right"> <b> '.number_format($b->PAY).'
                                      </b></td>
                                      </tr>
                                 <tr>
