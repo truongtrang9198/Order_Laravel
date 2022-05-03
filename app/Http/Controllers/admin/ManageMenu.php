@@ -9,6 +9,8 @@ use App\Models\DishtypeModel as DishtypeModel;
 use App\Models\MenuModel as MenuModel;
 use App\Models\Table_order as Table_order;
 use App\Models\BillModel as  BillModel;
+use App\Models\CommentModel as  CommentModel;
+
 use DB;
 use Illuminate\Support\Facades\Session;
 class ManageMenu extends Controller
@@ -73,10 +75,20 @@ class ManageMenu extends Controller
     }
 
     public function detail_menu($id){
+        // lấy chi tiết món ăn
         $MenuModel = new MenuModel();
         $data = $MenuModel->get($id,['task'=>'menu_with_id']);
-       // return $data;
-        return view('Homepage.detail_menu',['data'=>$data]);
+
+        // Lấy bình luận đánh giá
+        $CommentModel = new CommentModel();
+        $comment = $CommentModel->get_cmt($id);
+        $cmt = CommentModel::where('ID_DISH',$id)->get();
+        $rating_bad = $cmt->where('RATE','Tệ')->count();
+        $rating_normal=$cmt->where('RATE','Bình thường')->count();
+        $rating_wonder=$cmt->where('RATE','Xuất sắc')->count();
+
+        return view('Homepage.detail_menu',['data'=>$data,'comment'=>$comment,
+        'rating_bad'=>$rating_bad,'rating_normal'=>$rating_normal,'rating_wonder'=>$rating_wonder]);
     }
 
     public function _menu($id_table,$table_number){
@@ -131,6 +143,21 @@ class ManageMenu extends Controller
         $MenuModel = new MenuModel();
         $data = $MenuModel->get($id_dish_type,['task'=>'menu_type']);
         return view("Homepage.menu_type",["data"=>$data,"id_table"=>$id_table]);
+    }
+
+    public function status_menu(){
+        $data = MenuModel::where('active',1)
+                        ->get(['ID_DISH','DISH_NAME','DISH_STATUS']);
+        return view('staff.status_menu',['data'=>$data]);
+    }
+
+    public function handling_update_status(Request $re){
+        $id_dish = $re->id_dish;
+        $dish_status = $re->dish_status;
+        $data = MenuModel::find($id_dish);
+        $data->DISH_STATUS=$dish_status;
+        $data->save();
+        return "success";
     }
 
 }
