@@ -20,7 +20,7 @@ class BillModel extends Model
     public function getBill($id_bill){
 
         $detail = DB::select("call show_bill(".$id_bill.")");
-        $bill = DB::select("select ID_BILL,TOTAL,BILL_STATUS,fee,DISCOUNT from bill where ID_BILL = $id_bill");
+        $bill = DB::select("select ID_BILL,TOTAL,BILL_STATUS,fee,DISCOUNT,PAY from bill where ID_BILL = $id_bill");
 
         return ["detail"=>$detail,"bill"=>$bill];
     }
@@ -34,7 +34,7 @@ class BillModel extends Model
     }
 
     public function get_all_bill(){
-        $items = DB::select("select ID_BILL,TOTAL,BILL_STATUS,bill.ID_TABLE,fee,Time_start,NUMBER_TABLE,DISCOUNT
+        $items = DB::select("select ID_BILL,TOTAL,BILL_STATUS,bill.ID_TABLE,fee,PAY,Time_start,NUMBER_TABLE,DISCOUNT
                     from bill
                     inner join table_order
                     on bill.ID_TABLE = table_order.ID_TABLE
