@@ -6,10 +6,9 @@
             <img src="{{asset('order.png')}}" alt="" >
             <br>
              <span class="text-light"><i class="fas fa-user-check"></i></span>
+             <a href="{{route('logout')}}">Đăng xuất</a>
             </div>
-            <div class="slide_img">
 
-            </div>
 
         </div>
     </div>
