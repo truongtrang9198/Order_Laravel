@@ -70,7 +70,7 @@ class CustomerController extends Controller
         // session(['id_customer' => '']);
         return redirect()->route('begin');
     }
-
+// Kiểm tra đủ điều kiện sử dụng khuyến mãi hay không
     public function check_discount(){
         if(session()->exists('id_customer') && session('id_customer')!=''){
             $id_customer = session('id_customer');
@@ -85,5 +85,25 @@ class CustomerController extends Controller
         }else{
             return "Null";
         }
+    }
+// Xem lịch sử
+    public function history(){
+        $id_customer = session('id_customer');
+        $CustomerModel = new CustomerModel();
+        $info = CustomerModel::find($id_customer);
+        $data = $CustomerModel->customer_history($id_customer);
+         $total = $CustomerModel->Total($id_customer);
+
+        return view("Homepage.history",["info"=>$info,"total"=>$total,"detail"=>$data]);
+    }
+
+    public function user_update(Request $re){
+        $id_customer = session('id_customer');
+        $ne_name = $re->ne_name;
+       $CustomerModel =  CustomerModel::find($id_customer);
+       $CustomerModel->FULLNAME = $ne_name;
+       $CustomerModel->save();
+        return $ne_name;
+
     }
 }
