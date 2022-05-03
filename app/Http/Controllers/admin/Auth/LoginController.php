@@ -8,27 +8,18 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\StaffModel as StaffModel;
 use DB;
 use App\Models\User as User;
+use App\Models\PositionModel as PositionModel;
+
 
 class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        // if ($request->getMethod() == 'GET') {
-        //     return view('amin.home.login');
-        // }
         return view('amin.home.login');
-
-        // $credentials = $request->only(['email', 'password']);
-        // if (Auth::guard('admin')->attempt($credentials)) {
-        //     return redirect()->route('dashboard');
-        // } else {
-        //     return redirect()->back()->withInput();
-        // }
     }
     public function getlogin(Request $request){
         $phone = $request->STAFF_PHONE;
-        $password = $request->STAFF_PWD;
-       // $password =  bcrypt($password);
+        $password = $request->password;
         $StaffModel = new User();
        // echo bcrypt(123456);
       //  dd($request->only('STAFF_PHONE','STAFF_PWD'));
@@ -38,13 +29,26 @@ class LoginController extends Controller
 
 
         if($i!=0){
-          // $pwd = DB::select("select STAFF_PWD from staff where STAFF_PHONE = $phone");
-         //  $password_db = $pwd[0]->STAFF_PWD;
 
-        dd(Auth::attempt(['STAFF_PHONE'=>$phone,'STAFF_PWD'=>$password,
-                                           'active'=>1]));
-          // dd(Auth::attempt($request->only('STAFF_PHONE','STAFF_PWD')));
-           if(Auth::guard('admin')->attempt($request->only('STAFF_PHONE','STAFF_PWD')));
+        // dd(Auth::guard('admin')->attempt($request->only('STAFF_PHONE','password')));
+        if(Auth::guard('admin')->attempt($request->only('STAFF_PHONE','password')));
+            $position = User::where('STAFF_PHONE',$phone)
+                                ->where('active',1)
+                                ->get('ID_POSITION');
+
+            foreach($position as $pos)
+                $id_pos = $pos->ID_POSITION;
+
+            // điều hướng
+            $data = PositionModel::find($id_pos);
+            if($data->POSITION_NAME == "Admin")
+                return redirect()->route('home');
+
+            if($data->POSITION_NAME == "Thu ngân")
+                return redirect()->route('page_payment');
+
+            if($data->POSITION_NAME == "Bếp")
+                return redirect()->route('order_process');
 
         }else{
 
