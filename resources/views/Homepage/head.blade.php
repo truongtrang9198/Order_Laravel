@@ -4,9 +4,9 @@
 <title>@yield('tile')</title>
 <link rel="stylesheet" href="{{ asset('http://localhost/Order_Laravel/resources/css/homepage.css') }}">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
 
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <!-- Latest compiled and minified CSS -->
