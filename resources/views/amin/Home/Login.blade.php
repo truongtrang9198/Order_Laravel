@@ -5,7 +5,7 @@
         <img src="{{ asset('http://localhost/Order_Laravel/storage/app/img/order.png') }}" alt="Hình ảnh logo">
     </div>
     <div id="form-login-admin">
-        <form action="{{ route('getlogin') }}" method="GET">
+        <form action="{{ route('getlogin') }}" method="post">
             @csrf
             <div class="input-group mb3 input-admin">
                 <div class="input-group-prepend">
@@ -18,7 +18,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
                 </div>
-                <input type="password" class="form-control input-admin" placeholder="Password" name="STAFF_PWD">
+                <input type="password" class="form-control input-admin" placeholder="Password" name="password">
             </div>
             @if ($errors->any())
                 <span class="text-muted">{{ $errors->first() }}</span>
