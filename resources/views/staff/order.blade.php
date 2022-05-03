@@ -2,8 +2,11 @@
 @section('tile', 'Bếp')
 @section('main')
     @parent
-
-
+    <div class="container-fluid">
+        <nav>
+            <span><i class="fas fa-home"></i></span>
+            <a href="{{route('status_menu')}}">menu</a>
+        </nav>
             <table class="table table-striped table-hover">
                 <thead class="thead-inverse">
                     <tr>
@@ -38,7 +41,7 @@
 
                     </tbody>
             </table>
-
+   </div>
  @endsection
 
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
