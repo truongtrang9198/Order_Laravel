@@ -1,4 +1,4 @@
-<?php echo csrf_field(); ?>
+
 @extends('amin.Home')
 @section('tile', 'Quản lý nhân viên')
 @section('main')
