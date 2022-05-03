@@ -42,4 +42,19 @@ class BillModel extends Model
 
         return $items;
     }
+
+    public function get_chart(){
+        $result = DB::select("call get_chart()");
+        return $result;
+    }
+
+    public function get_table_active(){
+        $result = DB::select("call get_table_active()");
+        return $result;
+    }
+
+    public function staff_end($id_staff){
+        $result = DB::select("call staff_end($id_staff)");
+        return $result;
+    }
 }
