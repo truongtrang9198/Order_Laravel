@@ -7,7 +7,7 @@
 <body class="body">
     <div class="fluid-container">
         <div class="header">
-            @include('Homepage.Header')
+            @include('staff.Header')
         </div>
         <hr>
     </div>
