@@ -79,6 +79,34 @@
         return "Susscess";
     }
 
+    public function manage_order(){
+        $BillModel = new BillModel();
+        $data = $BillModel->get_table_active();
+        return view('amin.Home.manage_order',["data"=>$data]);
+    }
+
+    public function detail_order($id_bill){
+        $BillModel = new BillModel();
+        $items = $BillModel->getBill($id_bill);
+        $detail = $items['detail'];
+        return view('amin.Home.detail_order',['detail'=>$detail]);
+    }
+
+    public function delete_order(Request $re){
+        $id_detail = $re->id_detail;
+        $DetailModel = DetailModel::find($id_detail);
+        $id_bill = $DetailModel->ID_BILL;
+        $id_dish = $DetailModel->ID_DISH;
+        $price_arr = MenuModel::where('ID_DISH',$id_dish)
+                            ->get('DISH_PRICE');
+        foreach($price_arr as $price)
+            $pri = $price->DISH_PRICE;
+
+        DB::select("call delete_order($id_bill,$pri)");
+
+        $DetailModel->delete();
+        return "Success";
+    }
 
 }
 ?>
