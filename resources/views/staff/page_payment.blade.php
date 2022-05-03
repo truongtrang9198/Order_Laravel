@@ -18,6 +18,8 @@
                         <th>Thời gian vào</th>
                         <th>Trạng thái</th>
                         <th>Tổng tiền</th>
+                        <th>Thanh toán</th>
+
                         <th></th>
                         <th></th>
                         <th></th>
@@ -35,6 +37,7 @@
                                     <td>'.$dt->Time_start.'</td>
                                     <td>'.$dt->BILL_STATUS.'</td>
                                     <td>'.number_format($dt->TOTAL).' VND</td>
+                                    <td>'.number_format($dt->PAY).' VND</td>
                                     <form action="" class="form-confirm">
 
                                     <input type="text" name="id_bill" value="'.$dt->ID_BILL.'" hidden>
@@ -42,6 +45,7 @@
                                     <input type="text" name="fee" value="'.$dt->fee.'" hidden>
                                     <input type="text" name="discount" value="'.$dt->DISCOUNT.'" hidden>
                                     <input type="text" name="id_table" value="'.$dt->ID_TABLE.'" hidden>
+                                    <input type="text" name="pay" value="'.$dt->PAY.'" hidden>
 
                                     <td><button type="submit" class="btn btn-outline-info btn-click"
                                          >Thanh toán</button></td>
@@ -161,38 +165,12 @@
     </div>
   </div>
 
-
-  {{-- Model hiển thị chi tiết món ăn --}}
-  {{-- <div class="modal" id="model_detail">
-    <div class="modal-header">
-        <h4 class="modal-title">Chi tiết hóa đơn</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Tên món</th>
-                    <th>Giá</th>
-                    <th>Thời gian</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><span id="dish_name"></span></td>
-                    <td><span id="dish_price"></span> </td>
-                    <td><span id="time"></span> </td>
-                </tr>
-            </tbody>
-        </table>
-      </div>
-  </div> --}}
  @endsection
 
 
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
- <meta name="csrf-token" content="{{ csrf_token() }}" />
+
  <script>
      $(document).ready(function() {
 
@@ -216,13 +194,13 @@
             let fee  = form_data[2]['value'];
             let discount = form_data[3]['value'];
             let id_table = form_data[4]['value'];
-
+            let pay = form_data[5]['value'];
             $('#total').val(total);
             $('#fee').val(fee);
             $('#discount').val(discount);
             $('#id_bill_temp').val(id_bill);
             $('#id_table_temp').val(id_table);
-             paid = parseInt(total) + parseInt(fee);
+             paid = parseInt(pay) + parseInt(fee);
             $('#paid').val(paid);
             //$('#paid').val(paid);
             $("#myModal").modal();
@@ -232,7 +210,7 @@
                  discount = $('#discount').val();
 
                 var money_in = $('#money-in').val();
-                paid = parseInt(total)  + parseInt(fee);;
+                paid = parseInt(pay)  + parseInt(fee);;
                 //let paid_ = numberFormat.format(paid);
                 $('#paid').val(paid);
                 excess_cash = money_in - parseInt(paid);
