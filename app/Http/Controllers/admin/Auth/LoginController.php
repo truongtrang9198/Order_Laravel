@@ -39,6 +39,8 @@ class LoginController extends Controller
             foreach($position as $pos)
                 $id_pos = $pos->ID_POSITION;
 
+            $id_staff = Auth::guard('admin')->id();
+
             // điều hướng
             $data = PositionModel::find($id_pos);
             if($data->POSITION_NAME == "Admin")
@@ -55,5 +57,9 @@ class LoginController extends Controller
             return redirect()->route('login')->with('error',('Số điện thoại không chính xác'));
         }
 
+    }
+
+    public function id_user(){
+        dd();
     }
 }
