@@ -21,14 +21,14 @@ class BillController extends Controller
         $data->BILL_STATUS = "Chờ thanh toán";
         if(session('id_customer') !='' && $discount!=''){
             $id_customer = session('id_customer');
-            $data->DISCOUNT = $discount;
-            $data->PAY = ((int)$data->TOTAL - round($discount*0.01* (int)$data->TOTAL)) + (int)$data->fee;
-            // Sửa điểm trong bảng customer
+          // Tính toán lại giá tiền khi áp khuyến mãi
+            DB::select("call proc_pay($id_bill,$discount)");
+          // Sửa điểm trong bảng customer
             $cs = CustomerModel::find($id_customer);
             $cs->POINT_TOTAL = $cs->POINT_TOTAL -$discount;
             $cs->save() ;
         }
-
+        $data->DISCOUNT = $discount;
         $data->save();
 
         session()->push('id_table','');
