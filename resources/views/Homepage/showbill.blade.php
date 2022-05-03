@@ -3,7 +3,7 @@
 @section('tile', 'Tạm tính')
 @section('main')
     @parent
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-xm-12 col-md-6">
                 <table class="table table-bordered">
