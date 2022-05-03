@@ -36,16 +36,15 @@ Route::get('menu_type/',[ManageMenu::class,'menu_type'] )->name('menu_type');
 Route::post('add_order/',[DetailController::class,'add_order'])->name('add_order');
 Route::get('show_bill/{id_bill}',[DetailController::class,'show_bill'])->name('show_bill');
 Route::get('show_bill1/{id_bill}',[DetailController::class,'show_bill1'])->name('show_bill1');
-Route::get('order_process/',[DetailController::class,'order_process'])->name('order_process');
-Route::post('Staff/confirm/',[DetailController::class,'confirm'])->name('confirm');
 
-Route::post('Staff/get-confirm/',[BillController::class,'get_confirm'])->name('get-confirm');
-Route::get('Staff/page_payment/',[BillController::class,'page_payment'])->name('page_payment');
-Route::post('Staff/confirmed/',[BillController::class,'confirmed'])->name('confirmed');
+Route::post('get-confirm/',[BillController::class,'get_confirm'])->name('get-confirm');
 Route::get('Comment/check_condition',[CommentController::class,'check_condition'])->name('check_condition');
 // Route::get('Comment/{id_bill}',[CommentController::class,'check_condition'])->name('go_cmt')
 // ->where('id_bill','[0-9]+');
-Route::get('Comment/comment/{id_bill}',[CommentController::class,'go_comment'])->name('go_cmt');
+Route::get('Comment/{id_bill}',[CommentController::class,'go_comment'])->name('go_cmt');
 Route::post('Comment/insert_cmt',[CommentController::class,'insert_cmt'])->name('insert_cmt');
 Route::get('exit/',[CustomerController::class,'exit'])->name('exit');
 Route::get('check_discount/',[CustomerController::class,'check_discount'])->name('check_discount');
+
+Route::get('Customer/history/',[CustomerController::class,'history'])->name('history');
+Route::post('user_update/',[CustomerController::class,'user_update'])->name('user_update');
