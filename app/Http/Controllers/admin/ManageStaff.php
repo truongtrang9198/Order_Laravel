@@ -27,17 +27,6 @@ class ManageStaff extends Controller
         return view($this->pathview."home.login");
     }
 
-    public function getlogin(Request $request){
-
-        $phone = $request->phone;
-        $password = $request->password;
-        if(Auth::attempt(['phone' => $phone, 'password' => $password])){
-            echo "thành công";
-        }else{
-            echo "Thất bại";
-        }
-       // return view($this->pathview."home.login");
-    }
     public function home(){
         return view($this->pathview."home");
     }
@@ -84,8 +73,8 @@ class ManageStaff extends Controller
         $StaffModel->STAFF_STATUS= 'Làm việc';
         $StaffModel->ID_POSITION= $data['position'];
         $StaffModel->START_DAY = Carbon::now();
-        // Xử lý mật khẩu
-        $StaffModel->STAFF_PWD = Hash::make($data['pwd']);
+        // Xử lý mật khẩu Hash::make($request->newPassword)
+        $StaffModel->password = Hash::make($data['pwd']);
         $path = $request->img_staff->move('img/staff');
         $StaffModel->STAFF_IMG = $path;
         $StaffModel->save();
