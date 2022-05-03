@@ -7,9 +7,9 @@
 @section('tile', 'Bộ phận thu ngân')
 @section('main')
     @parent
-
+            {{-- <a href="{{route('id_user')}}">onclick</a> --}}
             <button class="btn btn-success" id="btn-reload" onclick="window.location.reload();"><i class="fas fa-redo-alt"></i></button>
-            <a href="" role="button" class="btn btn-primary">All</a>
+            <a href="{{route('end_of')}}" role="button" class="btn btn-primary">Kết ca</a>
             <table class="table table-striped table-hover">
                 <thead class="thead-inverse">
                     <tr>
